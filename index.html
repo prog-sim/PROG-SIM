@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PROG SIM (Programming Simulator) is an offline beginner-friendly HTML learning resource for ICT students.">
+<meta name="theme-color" content="#292e37">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>PROG SIM | Programming Simulator</title>
+<style>
+:root{--ink:#20242c;--muted:#667085;--bg:#eef0f3;--card:#fff;--line:#d9dde4;--accent:#4776e6;--accent-dark:#315bc0;--good:#18794e;--bad:#b42318;--dark:#292e37}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+button,input,textarea{font:inherit}button{cursor:pointer}
+header{background:var(--dark);color:#fff;padding:15px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:2}
+.brand{font-weight:800;letter-spacing:.2px}.brand span{color:#a9c0ff}.tag{font-size:.82rem;color:#d5d9e0}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1300px;margin:auto;min-height:calc(100vh - 60px)}
+nav{background:#e1e4e9;padding:20px 13px;border-right:1px solid var(--line)}
+.navlabel{font-size:.75rem;text-transform:uppercase;color:#6b7280;font-weight:bold;padding:8px 10px}
+nav button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:11px 12px;border-radius:9px;margin:3px 0;color:#303640;font-weight:600}
+nav button.active,nav button:hover{background:#fff;color:var(--accent)}
+main{padding:26px;min-width:0}.page{display:none}.page.active{display:block}
+.hero{background:linear-gradient(120deg,#343a46,#505b6d);color:#fff;padding:28px;border-radius:16px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.65rem,3vw,2.4rem);margin:0 0 8px}.hero p{max-width:700px;color:#e2e6ed;margin:0 0 18px}
+.btn{border:0;border-radius:9px;padding:10px 15px;background:var(--accent);color:white;font-weight:bold}.btn:hover{background:var(--accent-dark)}.btn.secondary{background:#e8edf9;color:#2d4f9c}.btn.dark{background:#303743}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 2px 5px #20242c08}.card h3{margin:7px 0}.card p{color:var(--muted);margin:6px 0 14px}.eyebrow{color:var(--accent);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:20px 0 12px}.sectionhead h2{margin:0;font-size:1.3rem}
+.lesson-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:16px}
+pre,textarea.code{background:#202630;color:#e7ecf4;border-radius:10px;padding:15px;overflow:auto;font-family:Consolas,monospace;font-size:.92rem;white-space:pre-wrap}
+textarea.code{display:block;width:100%;min-height:230px;resize:vertical;border:1px solid #4c5666}
+.preview{background:white;border:1px solid var(--line);border-radius:10px;min-height:150px;padding:15px;overflow:auto;color:#222}
+.small{font-size:.9rem;color:var(--muted)}.pill{display:inline-block;background:#e8edf9;color:#3455a2;border-radius:20px;padding:3px 9px;font-size:.78rem;font-weight:bold}
+.lesson-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.lesson-card{display:flex;gap:13px;align-items:flex-start}.num{background:#e6ebf4;color:#374151;border-radius:10px;min-width:40px;height:40px;display:grid;place-items:center;font-weight:bold}
+.question{padding:16px 0;border-bottom:1px solid var(--line)}.question p{font-weight:700;margin:0 0 10px}.options label{display:block;padding:8px 10px;border:1px solid var(--line);border-radius:8px;margin:6px 0;background:white;cursor:pointer}.options input{margin-right:8px}.feedback{margin-top:10px;padding:10px;border-radius:8px;background:#edf0f5}.notice{padding:12px;background:#f7f8fa;border-left:4px solid var(--accent);border-radius:5px;margin:12px 0}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:25px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}nav{display:flex;overflow-x:auto;gap:5px;padding:8px;border-right:0;border-bottom:1px solid var(--line)}.navlabel{display:none}nav button{white-space:nowrap;width:auto;margin:0}.grid{grid-template-columns:1fr}.lesson-layout{grid-template-columns:1fr}.lesson-list{grid-template-columns:1fr}main{padding:15px}header{padding:12px 15px}}
+</style>
+</head>
+<body>
+<header><div class="brand">PROG <span>SIM</span></div><div class="tag">A beginner-friendly ICT learning resource</div></header>
+<div class="layout">
+<nav aria-label="Main navigation">
+ <div class="navlabel">Menu</div>
+ <button class="active" data-page="home">⌂ &nbsp; Home</button>
+ <button data-page="lessons">▤ &nbsp; HTML Lessons</button>
+ <button data-page="practice">⌨ &nbsp; Code Practice</button>
+ <button data-page="quiz">✓ &nbsp; Quiz</button>
+ <button data-page="progress">▥ &nbsp; My Progress</button>
+</nav>
+<main>
+<section id="home" class="page active">
+ <div class="hero"><div class="eyebrow" style="color:#c9d7ff">WELCOME, ICT LEARNER</div><h1>Learn HTML one step at a time.</h1><p>Understand the building blocks of a webpage through short lessons, examples, hands-on practice, and a quiz. No internet connection is needed.</p><button class="btn" onclick="showPage('lessons')">Start learning →</button></div>
+ <div class="grid">
+  <article class="card"><div class="eyebrow">01 / Learn</div><h3>Short lessons</h3><p>Explore HTML structure, headings, links, images, lists, and attributes.</p><button class="btn secondary" onclick="showPage('lessons')">View lessons</button></article>
+  <article class="card"><div class="eyebrow">02 / Practice</div><h3>Try writing code</h3><p>Edit a sample HTML page and see your changes in the preview.</p><button class="btn secondary" onclick="showPage('practice')">Open editor</button></article>
+  <article class="card"><div class="eyebrow">03 / Check</div><h3>Test your knowledge</h3><p>Answer multiple-choice questions and get feedback on your answers.</p><button class="btn secondary" onclick="showPage('quiz')">Take the quiz</button></article>
+ </div>
+ <div class="sectionhead"><h2>Learning path</h2><span class="small">Recommended order</span></div>
+ <div class="notice">Tip: Read a lesson first, try the code in the practice editor, then take the quiz. You can revisit any topic whenever you need to.</div>
+</section>
+<section id="lessons" class="page">
+ <div class="sectionhead"><h1>HTML Lessons</h1><span class="pill">Beginner level</span></div>
+ <p class="small">Choose a lesson to read its explanation and example.</p>
+ <div id="lessonList" class="lesson-list"></div>
+ <article class="card" id="lessonDetail" style="margin-top:16px"><div class="eyebrow">SELECT A LESSON</div><h2>Start with the basics</h2><p>Choose one of the lesson cards above. Each lesson includes a plain-language explanation and a short example.</p></article>
+</section>
+<section id="practice" class="page">
+ <div class="sectionhead"><h1>Code Practice</h1><span class="pill">Experiment safely</span></div>
+ <p>Change the HTML in the editor, then choose <b>Update preview</b>. The preview shows what your code produces.</p>
+ <div class="lesson-layout">
+  <div class="card"><h3>Your HTML code</h3><textarea id="codeEditor" class="code" spellcheck="false"><!DOCTYPE html>
+<html>
+<body>
+  <h1>My First Webpage</h1>
+  <p>I am learning HTML!</p>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.warn("Offline support could not be registered:", error));
+  });
+}
+</script>
+</body>
+</html></textarea><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="updatePreview()">Update preview</button><button class="btn secondary" onclick="resetCode()">Reset example</button></div><p class="small">This editor is for beginner practice. It does not save code to a server.</p></div>
+  <div class="card"><h3>Webpage preview</h3><div id="preview" class="preview"></div><p class="small">Only your local preview is shown here.</p></div>
+ </div>
+ <div class="notice"><b>Remember:</b> Most HTML elements use an opening tag, content, and a closing tag. For example: <code>&lt;p&gt;Hello!&lt;/p&gt;</code>.</div>
+</section>
+<section id="quiz" class="page">
+ <div class="sectionhead"><h1>HTML Knowledge Quiz</h1><span class="pill">10 questions</span></div>
+ <p>Choose one answer for each question, then submit to see your score and explanations.</p>
+ <form id="quizForm"><div id="quizQuestions"></div><button class="btn" type="submit">Submit answers</button><button class="btn secondary" type="button" onclick="resetQuiz()">Try again</button></form>
+ <div id="quizResult" class="card" style="display:none;margin-top:16px" aria-live="polite"></div>
+</section>
+<section id="progress" class="page">
+ <div class="sectionhead"><h1>My Progress</h1><span class="pill">This browser</span></div>
+ <div class="grid">
+  <article class="card"><div class="eyebrow">Lessons</div><h2 id="completedCount">0 / 6</h2><p>Lessons marked as completed.</p></article>
+  <article class="card"><div class="eyebrow">Latest quiz</div><h2 id="latestScore">Not taken yet</h2><p>Your most recent quiz score on this browser.</p></article>
+  <article class="card"><div class="eyebrow">Next step</div><h3>Keep practicing</h3><p>Review a lesson and try the quiz again to strengthen your understanding.</p><button class="btn secondary" onclick="showPage('lessons')">Review lessons</button></article>
+ </div>
+ <div class="notice">Progress is stored locally in this browser when local storage is available. It is not shared across devices and may be cleared if browser data is removed.</div>
+ <button class="btn secondary" onclick="clearProgress()">Clear saved progress</button>
+</section>
+<footer>PROG SIM · Programming Simulator · Offline learning resource for ICT students</footer>
+</main>
+</div>
+<script>
+const lessons=[
+{title:"Introduction to HTML",desc:"Learn what HTML does and how it structures webpage content.",body:"HTML stands for HyperText Markup Language. It gives webpage content structure, such as headings, paragraphs, links, and images. HTML is a markup language, not a programming language.",code:"<h1>Welcome!</h1>\\n<p>This is my webpage.</p>"},
+{title:"HTML Document Structure",desc:"Recognize the basic parts of an HTML document.",body:"A basic HTML document includes <!DOCTYPE html>, the <html> element, a <head> section for page information, and a <body> section for visible content.",code:"<!DOCTYPE html>\\n<html>\\n<head>\\n  <title>My Page</title>\\n</head>\\n<body>\\n  <h1>Hello!</h1>\\n<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.warn("Offline support could not be registered:", error));
+  });
+}
+</script>
+</body>\\n</html>"},
+{title:"Headings and Paragraphs",desc:"Add titles, subtitles, and ordinary text.",body:"Use <h1> for the main heading and <h2> through <h6> for lower-level headings. Use <p> for a paragraph.",code:"<h1>About Me</h1>\\n<h2>My Hobbies</h2>\\n<p>I enjoy learning HTML.</p>"},
+{title:"Links and Images",desc:"Connect pages and display images using elements.",body:"The <a> element creates a link and commonly uses the href attribute. The <img> element displays an image and uses src for its file path and alt for alternative text.",code:'<a href="lesson.html">Open lesson</a>\\n<img src="photo.jpg" alt="A sample photo">'},
+{title:"Lists and Tables",desc:"Organize information into lists and rows.",body:"Use <ul> for an unordered list, <ol> for an ordered list, and <li> for each list item. Tables use <table>, rows use <tr>, headings use <th>, and data cells use <td>.",code:"<ul>\\n  <li>HTML</li>\\n  <li>CSS</li>\\n</ul>"},
+{title:"Basic HTML Attributes",desc:"Add extra information to HTML elements.",body:"Attributes are written in an opening tag. Common examples include href for a link destination, src for a file location, and alt for image alternative text. Attribute values are usually placed in quotation marks.",code:'<a href="https://example.com">Visit example</a>\\n<img src="logo.png" alt="Site logo">'}
+];
+const quiz=[
+{q:"What does HTML stand for?",o:["HyperText Markup Language","High Transfer Machine Language","Home Tool Markup Link"],a:0,e:"HTML stands for HyperText Markup Language."},
+{q:"Which tag creates the main heading?",o:["<p>","<h1>","<img>"],a:1,e:"The <h1> tag is commonly used for the main heading."},
+{q:"Which tag is used for a paragraph?",o:["<p>","<head>","<tr>"],a:0,e:"The <p> tag defines a paragraph."},
+{q:"Which section contains visible page content?",o:["<head>","<body>","<title>"],a:1,e:"Content shown in the webpage is placed inside <body>."},
+{q:"Which attribute gives a link its destination?",o:["src","alt","href"],a:2,e:"The href attribute specifies the link destination."},
+{q:"Which tag displays an image?",o:["<img>","<image-text>","<picturefile>"],a:0,e:"The <img> element embeds an image."},
+{q:"What is the purpose of the alt attribute on an image?",o:["To set the page title","To provide alternative text","To create a heading"],a:1,e:"Alternative text describes the image when it cannot be seen or loaded and supports accessibility."},
+{q:"Which tag creates an item in a list?",o:["<li>","<ulist>","<item>"],a:0,e:"The <li> tag defines a list item."},
+{q:"Where is the page title usually written?",o:["Inside <title> in the <head>","Inside <h1> only","Inside <footer>"],a:0,e:"The <title> element belongs in the <head> section."},
+{q:"What is an HTML attribute?",o:["A browser window","Extra information written in an element's opening tag","A type of image file"],a:1,e:"Attributes provide additional information about an element."}
+];
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function getCompleted(){try{return JSON.parse(localStorage.getItem('hlh_completed')||'[]')}catch(e){return []}}
+function markCompleted(i){let arr=getCompleted();if(!arr.includes(i))arr.push(i);try{localStorage.setItem('hlh_completed',JSON.stringify(arr))}catch(e){}renderProgress()}
+function renderLessons(){const box=document.getElementById('lessonList');box.innerHTML='';lessons.forEach((l,i)=>{let d=document.createElement('article');d.className='card lesson-card';d.innerHTML=`<div class="num">${String(i+1).padStart(2,'0')}</div><div><h3>${l.title}</h3><p>${l.desc}</p><button class="btn secondary" onclick="openLesson(${i})">Open lesson</button></div>`;box.appendChild(d)})}
+function openLesson(i){const l=lessons[i],d=document.getElementById('lessonDetail');d.innerHTML=`<div class="eyebrow">LESSON ${i+1} OF ${lessons.length}</div><h2>${l.title}</h2><p>${l.body.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')}</p><h3>Example code</h3><pre>${l.code.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')}</pre><button class="btn" onclick="markCompleted(${i})">Mark as completed</button> <span class="small">You can revisit this lesson anytime.</span>`;d.scrollIntoView({behavior:'smooth',block:'start'})}
+const defaultCode='<!DOCTYPE html>\\n<html>\\n<body>\\n  <h1>My First Webpage</h1>\\n  <p>I am learning HTML!</p>\\n<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.warn("Offline support could not be registered:", error));
+  });
+}
+</script>
+</body>\\n</html>';
+function updatePreview(){document.getElementById('preview').innerHTML=document.getElementById('codeEditor').value}
+function resetCode(){document.getElementById('codeEditor').value=defaultCode;updatePreview()}
+function renderQuiz(){const box=document.getElementById('quizQuestions');box.innerHTML='';quiz.forEach((q,i)=>{let d=document.createElement('div');d.className='question';let opts=q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o.replaceAll('<','&lt;').replaceAll('>','&gt;')}</label>`).join('');d.innerHTML=`<p>${i+1}. ${q.q}</p><div class="options">${opts}</div>`;box.appendChild(d)})}
+document.getElementById('quizForm').addEventListener('submit',e=>{e.preventDefault();let score=0,answered=0;const out=[];quiz.forEach((q,i)=>{const chosen=document.querySelector(`input[name="q${i}"]:checked`);if(chosen){answered++;if(Number(chosen.value)===q.a)score++}out.push(`<p><b>${i+1}. ${chosen&&Number(chosen.value)===q.a?'Correct':'Review'}:</b> ${q.e}</p>`)});const r=document.getElementById('quizResult');r.style.display='block';r.innerHTML=`<div class="eyebrow">YOUR RESULT</div><h2>${score} / ${quiz.length}</h2><p>You answered ${answered} of ${quiz.length} questions. Review the feedback below, then try again if you want.</p>${out.join('')}`;try{localStorage.setItem('hlh_latest_score',score+'/'+quiz.length)}catch(e){}renderProgress();r.scrollIntoView({behavior:'smooth',block:'start'})});
+function resetQuiz(){document.getElementById('quizForm').reset();document.getElementById('quizResult').style.display='none'}
+function renderProgress(){document.getElementById('completedCount').textContent=getCompleted().length+' / '+lessons.length;let s='Not taken yet';try{s=localStorage.getItem('hlh_latest_score')||s}catch(e){}document.getElementById('latestScore').textContent=s}
+function clearProgress(){try{localStorage.removeItem('hlh_completed');localStorage.removeItem('hlh_latest_score')}catch(e){}renderProgress();alert('Saved progress cleared for this browser.')}
+renderLessons();renderQuiz();updatePreview();renderProgress();
+</script>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.warn("Offline support could not be registered:", error));
+  });
+}
+</script>
+</body>
+</html>
